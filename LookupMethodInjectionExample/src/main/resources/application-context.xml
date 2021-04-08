@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- We are injecting prototype bean into Singleton class -->
+	<bean id="mathPlayer" class="com.lmi.beans.MathPlayer">
+		<lookup-method name="getMath" bean="math"/>
+		<!-- Here IOC container sees that we have lookup method declared here. So instead of directly creating object of
+		MathPlayer, ioc container will create one class MyMath$Proxy extending MathPlayer at runtime by using runtime bytecode generator libraries like "asm"
+		and overrides the method getMath and puts the logic og creating Math object into that. Also ioc container will create object of that new class instead of MathOPlayer and returns it. -->
+	</bean>
+	
+	<!-- If we create multiple bean definitions of MathPlayer here Then ioc container will have multiple objects of the MathPlayer -->
+	<bean id="math" class="com.lmi.beans.Math" scope="prototype">
+	</bean>
+	
+</beans>

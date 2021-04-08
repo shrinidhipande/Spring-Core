@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="msgWritter" class="com.sdp.beans.MessageWritter">
+		<property name="messageFormatter" ref="pdf"/>
+	</bean>
+	
+	<bean id="html" class="com.sdp.beans.HtmlMessageFormatter">
+	</bean>
+	
+	<bean id="pdf" class="com.sdp.beans.PdfMessageFormatter">
+	</bean>
+
+</beans>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="emiCalculator" class="com.loan.beans.EmiCalculator" depends-on="cacheManager">
+		<property name="loanEstimate" ref="loanEstimate"></property>
+		<constructor-arg ref="cache"></constructor-arg>
+	</bean>
+	
+	<bean id="loanEstimate" class="com.loan.beans.LoanEstimate">
+		<property name="city" value="Pune"></property>
+		<property name="amount" value="5000000"></property>
+		<property name="tenureInMonth" value="240"></property>
+	</bean>
+	
+	<bean id="cacheManager" class="com.loan.cache.CacheManager">
+		<constructor-arg ref="cache"></constructor-arg>
+		<constructor-arg>
+			<list>
+				<ref bean="propertyAccessor"></ref>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="propertyAccessor" class="com.loan.cache.PropertyAccessor"></bean>
+
+	<bean id="cache" class = "com.loan.cache.Cache"/>
+	
+</beans>
