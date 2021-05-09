@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<bean id="lib" class="com.collection.di.entity.Library">
+		<property name="storyBooks">
+			<list value-type="java.lang.String">
+				<value>Story-1</value>
+				<value>Story-2</value>
+			</list>
+		</property>
+		<property name="techBooks">
+			<set value-type="java.lang.String">
+				<value>tech-1</value>
+				<value>tech-2</value>
+			</set>
+		</property>
+		<property name="places">
+			<map key-type="java.lang.String" value-type="com.collection.di.entity.Shelf">
+<!--  				<entry key="story-1" value-ref="shelf-1"></entry>
+				<entry key="story-2" value-ref="shelf-1"></entry>
+				<entry key="tech-1" value-ref="shelf-2"></entry>
+				<entry key="tech-2" value-ref="shelf-2"></entry>-->
+				<entry key="Story-1">
+					<ref bean="shelf-1"></ref>
+				</entry>
+				<entry key="Story-2">
+					<ref bean="shelf-1"></ref>
+				</entry>
+				<entry key="tech-1" value-ref="shelf-2"></entry>
+				<entry key="tech-2" value-ref="shelf-2"></entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="shelf-1" class="com.collection.di.entity.Shelf">
+		<property name="shelfNo" value="1"></property>
+		<property name="bookType" value="Story"></property>
+	</bean>
+	<bean id="shelf-2" class="com.collection.di.entity.Shelf">
+		<property name="shelfNo" value="2"></property>
+		<property name="bookType" value="Tech"></property>
+	</bean>
+</beans>	
